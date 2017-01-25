@@ -11,10 +11,15 @@ def isPermutation(str1, str2):
     if len(str1) != len(str2):
         return False;
 
-    counts1 = countChars(str1)
-    counts2 = countChars(str2)
-    return counts1 == counts2
-
+    counts = countChars(str1)
+    for c in str2:
+        if c not in counts:
+            return False
+        else:
+            counts[c] -= 1
+            if counts[c] == 0:
+                del counts[c]
+    return not counts
 
 def test_isPermutation():
     assert isPermutation('python', 'thonpy')
