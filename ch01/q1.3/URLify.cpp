@@ -1,4 +1,5 @@
 #include <string>
+#include <algorithm>
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
@@ -19,9 +20,8 @@ std::string& URLify(std::string &url)
             break;
 
         if (url[loc] == ' ') {
-            url[newLoc--] = '0';
-            url[newLoc--] = '2';
-            url[newLoc--] = '%';
+            newLoc -= 2;
+            url.replace(newLoc--, 3, "%20");
         } else {
             url[newLoc--] = url[loc];
         }
