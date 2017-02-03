@@ -1,20 +1,30 @@
 #!/usr/bin/env python3
 
-def rotatedIndex(i, j, dem):
-    return j, dem-1-j
+import pdb
+
+def fromIndex(i, j, dem):
+    return dem-1-j, i
 
 def rotate(matrix):
     dem = len(matrix)
     if dem < 2:
         return matrix
 
+    def rotCell(x, y, temp=None):
+        nx, ny = fromIndex(x, y, dem)
+        if temp != None:
+            matrix[x][y] = temp
+        else:
+            matrix[x][y] = matrix[nx][ny]
+        return nx, ny
+
     for i in range(dem//2):
         for j in range(i, dem-1-i):
+            x, y = i, j
             temp = matrix[i][j]
-            matrix[i][j] = matrix[dem-1-j][i]
-            matrix[dem-1-j][i] = matrix[dem-1-i][dem-1-j]
-            matrix[dem-1-i][dem-1-j] = matrix[j][dem-1-i]
-            matrix[j][dem-1-i] = temp
+            for _ in range(3):
+                x, y = rotCell(x, y)
+            x, y = rotCell(x, y, temp)
 
     return matrix
 
