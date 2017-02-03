@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 
+def rotatedIndex(i, j, dem):
+    return j, dem-1-j
+
 def rotate(matrix):
     dem = len(matrix)
     if dem < 2:
         return matrix
 
-    rotated = [[0]*dem for _ in range(dem)]
+    for i in range(dem//2):
+        for j in range(i, dem-1-i):
+            temp = matrix[i][j]
+            matrix[i][j] = matrix[dem-1-j][i]
+            matrix[dem-1-j][i] = matrix[dem-1-i][dem-1-j]
+            matrix[dem-1-i][dem-1-j] = matrix[j][dem-1-i]
+            matrix[j][dem-1-i] = temp
 
-    for i in range(dem):
-        for j in range(dem):
-            rotated[j][dem-1-i] = matrix[i][j]
-    return rotated
+    return matrix
 
 def test_rotate():
+    assert [] == rotate([])
+    assert [1] == rotate([1])
+
+    assert [[3, 1], [4, 2]] == rotate([[1, 2], [3, 4]])
+
     assert [[13, 9, 5, 1],
             [14, 10, 6, 2],
             [15, 11, 7, 3],
