@@ -31,7 +31,7 @@ def kthToLast(head, k):
             return None
         ahead = ahead.next
     kth = head
-    while(ahead):
+    while ahead:
         ahead = ahead.next
         kth = kth.next
     return kth
@@ -39,7 +39,7 @@ def kthToLast(head, k):
 
 def test_fromSeq():
     seq = [1, 2, 3, 4, 5]
-    head = Node.fromSeq(seq);
+    head = Node.fromSeq(seq)
     i = 0
     node = head
     while node:
