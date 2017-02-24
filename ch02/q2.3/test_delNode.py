@@ -30,6 +30,15 @@ def eraseNode(node):
     next.next = None
     return next
 
+def checkEqual(ll, seq):
+    i = 0
+    node = ll
+    while node:
+        assert node.data == seq[i]
+        i += 1
+        node = node.next
+    assert i == len(seq)
+
 def test_eraseNode():
     seq = [1, 2, 3, 4, 5, 6, 7]
     ll = Node.fromSeq(seq)
@@ -40,10 +49,5 @@ def test_eraseNode():
         node = node.next
     assert eraseNode(node).data == 5
 
-    i = 0
-    node = ll
-    while node:
-        assert node.data == seq[i]
-        i += 1
-        node = node.next
+    checkEqual(ll, seq)
 

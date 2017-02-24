@@ -36,16 +36,19 @@ def kthToLast(head, k):
         kth = kth.next
     return kth
 
-
-def test_fromSeq():
-    seq = [1, 2, 3, 4, 5]
-    head = Node.fromSeq(seq)
+def checkEqual(ll, seq):
     i = 0
-    node = head
+    node = ll
     while node:
         assert node.data == seq[i]
         i += 1
         node = node.next
+    assert i == len(seq)
+
+def test_fromSeq():
+    seq = [1, 2, 3, 4, 5]
+    head = Node.fromSeq(seq)
+    checkEqual(head, seq)
 
 def test_kthToLast():
     ll = Node.fromSeq([1, 2, 3, 4, 5, 6, 7]);
