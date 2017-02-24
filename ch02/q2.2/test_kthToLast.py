@@ -50,8 +50,10 @@ def test_fromSeq():
 def test_kthToLast():
     ll = Node.fromSeq([1, 2, 3, 4, 5, 6, 7]);
     assert kthToLast(ll, 3).data == 5
-    assert kthToLast(ll, 4).data == 4
+    assert kthToLast(ll, 1).data == 7
     assert kthToLast(ll, 7).data == 1
     assert kthToLast(ll, 8) == None
     assert kthToLast(ll, 0) == None
+
+    assert kthToLast(None, 5) == None
 
