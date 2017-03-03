@@ -1,59 +1,40 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.prev = None
+import pytest
 
-    def insertAfter(self, node):
-        node.next = self.next
-        node.prev = self
-        if self.next:
-            self.next.prev = node
-        self.next = node
-        return node
+class Node:
+    def __init__(self, data, next):
+        self.data = data
+        self.next = next
+
+    def __repr__(self):
+        return '{0} -> {1}'.format(self.data, self.next)
+
+    def insertSeq(self, seq):
+        tail = self
+        for e in seq:
+            node = Node(e, None)
+            tail.next = node
+            tail = node
 
     @staticmethod
     def fromSeq(seq):
-        head = None
-        prev = None
-        for e in seq:
-            node = Node(e)
-            if not head:
-                head = node
-            if prev:
-                prev.insertAfter(node)
-            prev = node
-        return head
-
-    @staticmethod
-    def swap(n1, n2):
-        if n1.prev:
-            n1.prev.next = n2
-        if n1.next:
-            n1.next.prev = n2
-        if n2.prev:
-            n2.prev.next = n1
-        if n2.next:
-            n2.next.prev = n1
-        n1.prev, n1.next, n2.prev, n2.next = \
-        n2.prev, n2.next, n1.prev, n1.next
-
+        fakeHead = Node(None, None)
+        fakeHead.insertSeq(seq)
+        return fakeHead.next
 
 def partition(ll, v):
-    rh = ll
-    while (rh and rh.data < v):
-        rh = rh.next
-    if not rh:
-        return
-
-    sh = rh.next
-    while (sh):
-        if sh.data < v:
-            Node.swap(sh, rh)
-            rh, sh = sh.next, rh.next
+    if not ll: return None
+    left = ll
+    right = ll
+#    pytest.set_trace()
+    while right.next:
+        node = right.next
+        if node.data < v:
+            right.next = node.next
+            node.next = left
+            left = node
         else:
-            sh = sh.next
-
+            right = right.next
+    return left
 
 def checkEqual(ll, seq):
     i = 0
@@ -72,12 +53,13 @@ def test_fromSeq():
 def test_partition():
     seq = [3, 5, 8, 5, 10, 2, 1]
     ll = Node.fromSeq(seq)
-    partition(ll, 5)
-    partitioned = [3, 2, 1, 5, 10, 5, 8]
-    checkEqual(ll, partitioned)
+    pl = partition(ll, 5)
+    partitioned = [1, 2, 3, 5, 8, 5, 10]
+    checkEqual(pl, partitioned)
 
     seq = [3, 5, 8, 5, 10]
     ll = Node.fromSeq(seq)
-    partition(ll, 10)
-    checkEqual(ll, seq)
+    pl = partition(ll, 10)
+    partitioned = [5, 8, 5, 3, 10]
+    checkEqual(pl, partitioned)
 
