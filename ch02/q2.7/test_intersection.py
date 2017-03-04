@@ -2,12 +2,26 @@ import sys
 sys.path.append('..')
 from node import Node, checkEqual
 
-def haveIntersection(l1, l2):
+def getIntersection(l1, l2):
+    s = [0, 0]
     p = [l1, l2]
     for i in range(2):
         while p[i].next:
             p[i] = p[i].next
-    return p[0] is p [1]
+            s[i] += 1
+    if p[0] is not p[1]:
+        return None
+    p = [l1, l2]
+    for i in range(s[0] - s[1]):
+        p[0] = p[0].next
+    for i in range(s[1] - s[0]):
+        p[1] = p[1].next
+    while p[0] and p[1]:
+        if p[0] is p[1]:
+            return p[0]
+        p[0] = p[0].next
+        p[1] = p[1].next
+    return None
 
 def test_eraseNode():
     s1 = [1, 2, 3, 4, 5]
@@ -23,7 +37,7 @@ def test_eraseNode():
     p2 = l2.insertAfter(Node(11, None))
     p2 = p2.insertAfter(Node(12, None))
     p2.next = p1
-    assert haveIntersection(l1, l2)
+    assert getIntersection(l1, l2) is p1
 
     s1 = [1, 2, 3, 4, 5]
     fh = Node(None, None)
@@ -32,5 +46,5 @@ def test_eraseNode():
     fh = Node(None, None)
     fh.insertSeq(s1)
     l2 = fh.next
-    assert not haveIntersection(l1, l2)
+    assert not getIntersection(l1, l2)
 
