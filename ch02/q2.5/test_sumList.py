@@ -1,28 +1,6 @@
-import pytest
-
-class Node:
-    def __init__(self, data, next):
-        self.data = data
-        self.next = next
-
-    def insertAfter(self, node):
-        node.next = self.next
-        self.next = node
-        return node
-
-    @staticmethod
-    def fromSeq(seq):
-        head = None
-        prev = None
-        for e in seq:
-            node = Node(e, None)
-            if not head:
-                head = node
-            if prev:
-                prev.insertAfter(node)
-            prev = node
-        return head
-
+import sys
+sys.path.append('..')
+from node import Node, checkEqual
 
 def sumList(l1, l2):
     fh = Node(None, None)
@@ -40,15 +18,6 @@ def sumList(l1, l2):
     if carry:
         r = r.insertAfter(Node(carry, None))
     return fh.next
-
-def checkEqual(ll, seq):
-    i = 0
-    node = ll
-    while node:
-        assert node.data == seq[i]
-        i += 1
-        node = node.next
-    assert i == len(seq)
 
 def test_eraseNode():
     s1 = [7, 1, 6]
