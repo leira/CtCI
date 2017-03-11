@@ -18,13 +18,13 @@ def partition(ll, v):
 
 def test_partition():
     seq = [3, 5, 8, 5, 10, 2, 1]
-    ll = Node.fromSeq(seq)
+    ll, _ = Node.fromSeq(seq)
     pl = partition(ll, 5)
     partitioned = [1, 2, 3, 5, 8, 5, 10]
     checkEqual(pl, partitioned)
 
     seq = [3, 5, 8, 5, 10]
-    ll = Node.fromSeq(seq)
+    ll, _ = Node.fromSeq(seq)
     pl = partition(ll, 10)
     partitioned = [5, 8, 5, 3, 10]
     checkEqual(pl, partitioned)

@@ -21,17 +21,17 @@ def sumList(l1, l2):
 
 def test_eraseNode():
     s1 = [7, 1, 6]
-    l1 = Node.fromSeq(s1)
+    l1, _ = Node.fromSeq(s1)
     s2 = [5, 9, 2]
-    l2 = Node.fromSeq(s2)
+    l2, _ = Node.fromSeq(s2)
     lr = sumList(l1, l2)
     r = [2, 1, 9]
     checkEqual(lr, r)
 
     s1 = [7, 1, 6]
-    l1 = Node.fromSeq(s1)
+    l1, _ = Node.fromSeq(s1)
     s2 = [5, 9, 4]
-    l2 = Node.fromSeq(s2)
+    l2, _ = Node.fromSeq(s2)
     lr = sumList(l1, l2)
     r = [2, 1, 1, 1]
     checkEqual(lr, r)

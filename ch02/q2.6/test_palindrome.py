@@ -17,10 +17,10 @@ def isPalindrome(l):
 
 def test_eraseNode():
     s = [1, 2, 3, 4, 5, 4, 3, 2, 1]
-    l = Node.fromSeq(s)
+    l, _ = Node.fromSeq(s)
     assert isPalindrome(l)
 
     s = [1, 2, 3, 4, 5, 3, 2, 1]
-    l = Node.fromSeq(s)
+    l, _ = Node.fromSeq(s)
     assert not isPalindrome(l)
 

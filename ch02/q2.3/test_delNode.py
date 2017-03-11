@@ -12,7 +12,7 @@ def eraseNode(node):
 
 def test_eraseNode():
     seq = [1, 2, 3, 4, 5, 6, 7]
-    ll = Node.fromSeq(seq)
+    ll, _ = Node.fromSeq(seq)
 
     seq.remove(5)
     node = ll

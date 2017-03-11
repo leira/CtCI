@@ -16,12 +16,13 @@ class Node:
         for e in seq:
             node = Node(e, None)
             tail = tail.insertAfter(node)
+        return tail
 
     @staticmethod
     def fromSeq(seq):
         fakeHead = Node(None, None)
-        fakeHead.insertSeq(seq)
-        return fakeHead.next
+        tail = fakeHead.insertSeq(seq)
+        return fakeHead.next, tail
 
 def checkEqual(ll, seq):
     i = 0
