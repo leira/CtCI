@@ -4,7 +4,6 @@ class MinStack:
         self.minIndics = []
 
     def push(self, data):
-        pytest.set_trace()
         if len(self.minIndics) == 0:
             self.minIndics.append(len(self.stack))
         else:
