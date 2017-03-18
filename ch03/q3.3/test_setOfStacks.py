@@ -13,26 +13,19 @@ class SetOfStacks:
         self.stacks[-1].append(data)
 
     def pop(self):
-        if self.isEmpty():
-            raise IndexError
         data = self.stacks[-1].pop()
         if len(self.stacks[-1]) == 0:
             self.stacks.pop()
         return data
 
     def peek(self):
-        if self.isEmpty():
-            raise IndexError
         return self.stacks[-1][-1]
 
     def popAt(self, index):
-        if len(self.stacks) <= index:
-            raise IndexError
         data = self.stacks[index].pop()
         if len(self.stacks[index]) == 0:
             del self.stacks[index]
         return data
-
 
 def test_setOfStacks():
     sos = SetOfStacks(6)
