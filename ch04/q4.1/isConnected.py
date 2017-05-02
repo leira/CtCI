@@ -13,8 +13,10 @@ def isConnected(graph, a, b):
             return False;
         else:
             return testConnected(
-                {x for n in front for x in graph[n] if x not in seen},
-                seen | front
+                {x for n in front
+                    for x in graph[n]
+                        if x not in front|seen},
+                front|seen
             )
     return testConnected(set([a]), set())
 
